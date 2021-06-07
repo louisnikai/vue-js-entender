@@ -1,1 +1,1 @@
-# vue-js-entender
+# vue-js-extender
