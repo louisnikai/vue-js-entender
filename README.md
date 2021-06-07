@@ -29,7 +29,7 @@ import JSExtender from 'vue-js-extender'
 Vue.use(JSExtender)
 ```
 
-PS: It's better to import and use it at the first after import Vue.
+PS: It's better to import and use it at the first after import Vue in main.js.
 
 <br />
 <br />
