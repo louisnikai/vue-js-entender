@@ -24,7 +24,8 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "start": "npm run dev",
     "compile": "babel -d lib/ src/",
-    "prepare": "npm run compile"
+    "prepare": "npm run compile",
+    "unit": "jest --config test/unit/jest.conf.js --coverage"
   },
   "peerDependencies": {
     "moment": "^2.0.0",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
@@ -46,6 +48,9 @@
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",
+    "jest": "^21.2.1",
+    "jest-serializer-vue": "^2.0.2",
+    "vue-jest": "^2.6.0",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",

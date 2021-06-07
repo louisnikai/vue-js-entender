@@ -3,5 +3,6 @@
 *.config.js
 node_modules/
 src/
+test/
 
 *.code-workspace

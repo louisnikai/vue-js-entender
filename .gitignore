@@ -13,3 +13,4 @@ yarn-error.log
 *.sln
 *.code-workspace
 package-lock.json
+/test/unit/coverage
