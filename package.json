@@ -24,8 +24,9 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "start": "npm run dev",
     "compile": "babel -d lib/ src/",
-    "prepare": "npm run compile",
-    "unit": "jest --config test/unit/jest.conf.js --coverage"
+    "prepare": "npm run build && npm run compile",
+    "unit": "jest --config test/unit/jest.conf.js --coverage",
+    "test": "npm run unit"
   },
   "peerDependencies": {
     "moment": "^2.0.0",
