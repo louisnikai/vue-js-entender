@@ -1,0 +1,7 @@
+.*
+*.md
+*.config.js
+node_modules/
+src/
+
+*.code-workspace
