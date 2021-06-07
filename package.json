@@ -26,10 +26,6 @@
     "compile": "babel -d lib/ src/",
     "prepare": "npm run compile"
   },
-  "dependencies": {
-    "moment": "^2.0.0",
-    "vue": "^2.0.0"
-  },
   "peerDependencies": {
     "moment": "^2.0.0",
     "vue": "^2.0.0"
