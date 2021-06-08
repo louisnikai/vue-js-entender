@@ -14,7 +14,7 @@ Extend JS native objects for vue.
 
 # Getting started
 
-This package can extend JS native objects for vue.
+This package should extend JS native objects for vue.
 
 1. Install the package:
 ```
