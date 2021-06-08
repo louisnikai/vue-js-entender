@@ -1,6 +1,6 @@
 {
   "name": "vue-js-extender",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "title": "Vue JS Extender",
   "description": "Extend JS native objects for vue.",
   "author": "Louis Ni <louisnikai@gmail.com>",
