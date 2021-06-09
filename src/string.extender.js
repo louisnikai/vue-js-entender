@@ -338,21 +338,38 @@ exports.runStringExtender = (Vue) => {
 
   String.prototype.toPascalCase =
     String.prototype.toPascalCase ||
-    function (specificPrefix) {
-      let result = this.replace(/[-_]+/g, " ")
-        .replace(/[^\w\s]/g, "")
+    function (options = {
+      specificPrefix: null,
+      keepOtherChar: false
+    }) {
+      let specificPrefix = !!options ? options.specificPrefix : null;
+      let keepOtherChar = !!options ? options.keepOtherChar : false;
+
+      let result = this.replace(/[-_]+/g, " ");
+      result = result.replace(
+        /([^A-Za-z]|[A-Z]{2,}|\b)([a-z])([a-z]+)([^a-z]|\b)/g,
+        ($1, $2, $3, $4, $5) => {
+          return `${($2 !== undefined ? $2 : "") + $3.toUpperCase() + $4 + ($5 !== undefined ? $5 : "")}`;
+        }
+      );
+      result = result
         .replace(
-          /\s+(.)(\w+)/g,
-          ($1, $2, $3) => `${$2.toUpperCase() + $3.toLowerCase()}`
-        )
-        .replace(/\s/g, "")
-        .replace(/\w/, s => s.toUpperCase());
+          /([^A-Z]|\b)([A-Z])([A-Z]+)([^A-Z]|\b)/g,
+          ($1, $2, $3, $4, $5) => {
+            return `${($2 !== undefined ? $2 : "") + $3 + $4.toLowerCase() + ($5 !== undefined ? $5 : "")}`;
+          }
+        );
+      result = result.replace(/\s/g, "");
 
       if (!!specificPrefix)
         result = result.replace(
           new RegExp(`^${specificPrefix}`, "i"),
           `${specificPrefix}`
         );
+
+      if (!keepOtherChar) {
+        result = result.replace(/[^\w\s]/g, "");
+      }
 
       return result;
     };
@@ -362,7 +379,7 @@ exports.runStringExtender = (Vue) => {
       if (Object.typeOf(target) !== "string")
         throw new Error("target is not a string.");
 
-      return target.toCurrency.apply(target, args);
+      return target.toPascalCase.apply(target, args);
     };
 
   String.prototype.getFileExtension =
