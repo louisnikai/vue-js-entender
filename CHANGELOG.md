@@ -1,6 +1,6 @@
 ### v1.0.3
 
-- 修改String->toPascalCase方法
+- Change String->toPascalCase method.
 
 <br />
 <br />
