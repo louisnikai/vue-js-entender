@@ -112,3 +112,11 @@ PS: It's better to import and use it at the first after import Vue in main.js.
 <br />
 <br />
 <br />
+
+# Change Log
+
+<a href="https://github.com/louisnikai/vue-js-extender/blob/master/CHANGELOG.md">CHANGELOG.md</a>
+
+<br />
+<br />
+<br />

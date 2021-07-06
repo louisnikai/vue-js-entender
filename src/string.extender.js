@@ -347,19 +347,19 @@ exports.runStringExtender = (Vue) => {
 
       let result = this.replace(/[-_]+/g, " ");
       result = result.replace(
-        /([^A-Za-z]|[A-Z]{2,}|\b)([a-z])([a-z]+)([^a-z]|\b)/g,
+        /([^A-Za-z]|\b)([a-z])([a-z]+)([^A-Za-z]|\b)/g,
         ($1, $2, $3, $4, $5) => {
           return `${($2 !== undefined ? $2 : "") + $3.toUpperCase() + $4 + ($5 !== undefined ? $5 : "")}`;
         }
       );
       result = result
         .replace(
-          /([^A-Z]|\b)([A-Z])([A-Z]+)([^A-Z]|\b)/g,
+          /([^A-Za-z]|\b)([A-Z])([A-Z]+)([^A-Za-z]|\b)/g,
           ($1, $2, $3, $4, $5) => {
             return `${($2 !== undefined ? $2 : "") + $3 + $4.toLowerCase() + ($5 !== undefined ? $5 : "")}`;
           }
         );
-      result = result.replace(/\s/g, "");
+      result = result.replace(/\s/g, "").replace(/\w/, s => s.toUpperCase());
 
       if (!!specificPrefix)
         result = result.replace(

@@ -19,15 +19,12 @@ describe('JSExtender', () => {
     expect(String.toPascalCase('__FOO_BAR__')).toEqual('FooBar');
     expect(String.toPascalCase('FOOBAR')).toEqual('Foobar');
     expect(String.toPascalCase('FOO_BAR')).toEqual('FooBar');
-    expect(String.toPascalCase('fooBAR')).toEqual('FooBar');
+    expect(String.toPascalCase('fooBAR')).toEqual('FooBAR');
     expect(String.toPascalCase('fooBar')).toEqual('FooBar');
     expect(String.toPascalCase('fooBar', {
       specificPrefix: "FOO"
     })).toEqual('FOOBar');
-    expect(String.toPascalCase('FOObar')).toEqual('Foobar');
-    expect(String.toPascalCase('FOObar', {
-      specificPrefix: "FOO"
-    })).toEqual('FOObar');
+    expect(String.toPascalCase('FOObar')).toEqual('FOObar');
     expect(String.toPascalCase('!--foo-¿?-BAR--121-**%')).toEqual('FooBar121');
     expect(String.toPascalCase('!--foo-¿?-BAR--121-**%', {
       keepOtherChar: true
