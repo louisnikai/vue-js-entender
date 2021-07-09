@@ -34,4 +34,27 @@ describe('JSExtender', () => {
       keepOtherChar: true
     })).toEqual('Foo你好Bar');
   });
+
+  it('Test call Array.prototype.findObjPropValue', () => {
+    const dataList = [
+      {
+        key: "test1",
+        value: 1,
+        desc: "Test1"
+      },
+      {
+        key: "test2",
+        value: 2,
+        desc: "Test2"
+      },
+      {
+        key: "test3",
+        value: 3,
+        desc: "Test3"
+      },
+    ];
+
+    expect(dataList.findObjPropValue({key: "test2"}, "value")).toEqual(2);
+    expect(dataList.findObjPropValue((item) => item.value === 3, "desc")).toEqual("Test3");
+  });
 })

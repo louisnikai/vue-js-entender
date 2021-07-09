@@ -163,17 +163,24 @@ exports.runArrayExtender = (Vue) => {
     };
 
   Array.prototype.findObjPropValue = Array.prototype.findObjPropValue || function (findConditions, fieldName, defaultValue = null, isOrMatch = false) {
-    if (Object.typeOf(findConditions) !== "object")
-      return defaultValue;
+    if (Object.typeOf(findConditions) === "object" || Object.typeOf(findConditions) === "function") {
+      let objData;
+      if (Object.typeOf(findConditions) === "object") {
+        objData = this.filter(item => Object.typeOf(item) === "object").find((item) => {
+          let fcKeys = Object.keys(findConditions).filter(fcKey => item[fcKey] !== undefined && item[fcKey] !== null);
+          return isOrMatch ? fcKeys.some(fcKey => item[fcKey] === findConditions[fcKey]) : fcKeys.every(fcKey => item[fcKey] === findConditions[fcKey]);
+        });
+      } else {
+        objData = this.filter(item => Object.typeOf(item) === "object").find(findConditions);
+      }
 
-    let objData = this.filter(item => Object.typeOf(item) === "object").find((item) => {
-      let fcKeys = Object.keys(findConditions).filter(fcKey => item[fcKey] !== undefined && item[fcKey] !== null);
-      return isOrMatch ? fcKeys.some(fcKey => item[fcKey] === findConditions[fcKey]) : fcKeys.every(fcKey => item[fcKey] === findConditions[fcKey]);
-    });
-    if (!objData || !Object.keys(objData).contains(fieldName))
-      return defaultValue;
+      if (!objData || !Object.keys(objData).contains(fieldName))
+        return defaultValue;
 
-    return objData[fieldName];
+      return objData[fieldName];
+    }
+
+    return defaultValue;
   };
   Array.findObjPropValue = Array.findObjPropValue || function (target, ...args) {
     if (Object.typeOf(target) !== "array")
