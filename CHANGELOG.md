@@ -10,6 +10,10 @@
 
 - Change Array->findObjPropValue method (Support findConditions parameter can be a callback function).
 
+### v1.0.6
+
+- Change Object->valueEquals method (Support exceptFields option).
+
 <br />
 <br />
 <br />

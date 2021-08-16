@@ -11,6 +11,21 @@ describe('JSExtender', () => {
     expect(result).toEqual("object");
   });
 
+  it('Test call Object.valueEquals', () => {
+    let objA = {
+      name: "Test1",
+      value: 1,
+      desc: "Test 1"
+    };
+    objA._originalData = Object.clone(objA);
+    let result = Object.valueEquals(objA, objA._originalData, {
+      exceptFields: ["_originalData"]
+    });
+
+    console.log("Test call Object.valueEquals result: ", result);
+    expect(result).toEqual(true);
+  });
+
   it('Test call String.prototype.toPascalCase', () => {
     expect(String.toPascalCase('foo bar')).toEqual('FooBar');
     expect(String.toPascalCase('Foo Bar')).toEqual('FooBar');

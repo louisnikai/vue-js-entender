@@ -2,6 +2,7 @@ const moment = require('moment');
 
 const _jsExtensionCache = {
   Object: {
+    valueEqualsKeys: ["exceptFields"],
     copyTypes: ["object", "array"],
     copyOptionKeys: ["deep", "exceptUndefined", "onlyFieldExists", "exceptFields"],
     cloneTypes: ["object", "array"],
@@ -38,7 +39,20 @@ exports.runObjectExtender = (Vue) => {
 
   Object.valueEquals =
     Object.valueEquals ||
-    function (objA, objB) {
+    function (objA, objB, options) {
+      let exceptFields = [];
+      if (
+        Object.typeOf(options) === "object" &&
+        Object.keys(options).some(key =>
+          _jsExtensionCache.Object.valueEqualsKeys.includes(key)
+        )
+      ) {
+        ({
+          exceptFields
+        } = options);
+        exceptFields = Object.typeOf(exceptFields) === "array" ? exceptFields : [];
+      }
+
       let objA_need = _jsExtensionCache.Object.valueEqualsTypes.includes(
         Object.typeOf(objA)
       );
@@ -48,10 +62,10 @@ exports.runObjectExtender = (Vue) => {
       if (!objA_need || !objB_need) return objA === objB;
 
       let keysA = Object.entries(objA)
-        .filter(entry => Object.typeOf(entry[1]) !== "function")
+        .filter(entry => Object.typeOf(entry[1]) !== "function" && !exceptFields.contains(entry[0]))
         .map(entry => entry[0]);
       let keysB = Object.entries(objB)
-        .filter(entry => Object.typeOf(entry[1]) !== "function")
+        .filter(entry => Object.typeOf(entry[1]) !== "function" && !exceptFields.contains(entry[0]))
         .map(entry => entry[0]);
       if (keysA.length != keysB.length) {
         // console.log(keysA, keysA.length, keysB, keysB.length);
