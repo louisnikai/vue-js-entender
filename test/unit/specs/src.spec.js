@@ -50,9 +50,8 @@ describe('JSExtender', () => {
     })).toEqual('Foo你好Bar');
   });
 
-  it('Test call Array.prototype.findObjPropValue', () => {
-    const dataList = [
-      {
+  it('Test call Array.prototype.contains', () => {
+    const dataList = [{
         key: "test1",
         value: 1,
         desc: "Test1"
@@ -69,7 +68,37 @@ describe('JSExtender', () => {
       },
     ];
 
-    expect(dataList.findObjPropValue({key: "test2"}, "value")).toEqual(2);
+    expect(dataList.contains(dataList[0])).toBeTruthy();
+    expect(dataList.contains({
+      key: "test1",
+      value: 1,
+      desc: "Test1"
+    })).toBeFalsy();
+    expect(dataList.contains("test2", (item, value) => item.key === value)).toBeTruthy();
+    expect(dataList.contains("test3", "key")).toBeTruthy();
+  });
+
+  it('Test call Array.prototype.findObjPropValue', () => {
+    const dataList = [{
+        key: "test1",
+        value: 1,
+        desc: "Test1"
+      },
+      {
+        key: "test2",
+        value: 2,
+        desc: "Test2"
+      },
+      {
+        key: "test3",
+        value: 3,
+        desc: "Test3"
+      },
+    ];
+
+    expect(dataList.findObjPropValue({
+      key: "test2"
+    }, "value")).toEqual(2);
     expect(dataList.findObjPropValue((item) => item.value === 3, "desc")).toEqual("Test3");
   });
 })

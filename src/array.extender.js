@@ -41,15 +41,16 @@ exports.runArrayExtender = (Vue) => {
   //------------------------- Array Extensions -------------------------
   Array.prototype.contains =
     Array.prototype.contains ||
-    function (value, comparator, callback) {
-      if (Object.typeOf(callback) === "function") return callback(this, value);
+    function (value, comparator) {
+      if (Object.typeOf(comparator) === "function") {
+        return this.some(item => comparator(item, value));
+      }
 
-      let useComparator = Object.typeOf(comparator) === "function";
-      if (!useComparator) return this.includes(value);
+      if (Object.typeOf(comparator) === "string") {
+        return this.some(item => item[comparator] === value);
+      }
 
-      return this.some(item => {
-        return comparator(item, value);
-      });
+      return this.includes(value);
     };
   Array.contains =
     Array.contains ||

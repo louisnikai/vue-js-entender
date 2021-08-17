@@ -14,6 +14,10 @@
 
 - Change Object->valueEquals method (Support exceptFields option).
 
+### v1.0.7
+
+- Fix issue for Array->contains method.
+
 <br />
 <br />
 <br />
