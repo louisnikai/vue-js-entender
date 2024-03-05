@@ -66,6 +66,7 @@ PS: It's better to import and use it at the first after import Vue in main.js.
 - `findObjPropValue` and `prototype.findObjPropValue`
 - `count` and `prototype.count`
 - `sum` and `prototype.sum`
+- `average` and `prototype.average`
 
 <br />
 

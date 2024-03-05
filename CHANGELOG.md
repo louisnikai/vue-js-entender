@@ -18,6 +18,14 @@
 
 - Fix issue for Array->contains method.
 
+### v1.0.8
+
+- Add Array->average method.
+
+### v1.0.9
+
+- Fix issue for Array->sortObject method.
+
 <br />
 <br />
 <br />

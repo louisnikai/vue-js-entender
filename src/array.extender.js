@@ -26,7 +26,7 @@ const _jsExtensionCache = {
         let propValue2 = obj2[propName];
 
         if (propValue2 < propValue1) result = fixedSortType === "desc" ? -1 : 1;
-        else if (propValue2 > propValue2)
+        else if (propValue2 > propValue1)
           result = fixedSortType === "desc" ? 1 : -1;
 
         return result;
@@ -221,6 +221,30 @@ exports.runArrayExtender = (Vue) => {
       throw new Error("target is not an array.");
 
     return target.sum.apply(target, args);
+  };
+
+  Array.prototype.average = Array.prototype.average || function (cbFunc) {
+    let count = this.length;
+    return this.reduce((total, item) => {
+      if (Object.typeOf(cbFunc) === "function") {
+        let currValue = cbFunc(item);
+        let avgValue = currValue / count;
+        return total + avgValue;
+      }
+
+      if (Object.typeOf(item) === "number") {
+        let avgValue = item / count;
+        return total + avgValue;
+      }
+
+      return total;
+    }, 0);
+  };
+  Array.average = Array.average || function (target, ...args) {
+    if (Object.typeOf(target) !== "array")
+      throw new Error("target is not an array.");
+
+    return target.average.apply(target, args);
   };
   //------------------------- End -------------------------
 };
